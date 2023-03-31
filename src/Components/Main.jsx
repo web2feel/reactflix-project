@@ -7,7 +7,7 @@ function Main() {
   return (
     <main>
       <div className="movieSlider">
-        <p style={{ textAlign: "center" }}>Movie slider goes here</p>
+        <p style={{ textAlign: "center" }}>Movie slider</p>
       </div>
       <Wrapper>
         <h2 className="sectionTitle">Popular Movies</h2>
