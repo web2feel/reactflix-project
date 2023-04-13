@@ -1,25 +1,10 @@
-import React, { useEffect, useState } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
-import axios from "axios";
+import { useFetch } from "../Hooks/useFetch";
 
 const Slider = () => {
-  const [latestMovies, setLatestMovies] = useState([]);
-  console.log(latestMovies);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      let { data } = await axios({
-        method: "get",
-        url: "https://api.themoviedb.org/3/movie/now_playing",
-        params: {
-          api_key: "e3ef60114f3455d412ea55db83f798b2",
-        },
-      });
-      setLatestMovies(data.results);
-    };
-    fetchData();
-  }, []);
+  const [data] = useFetch("movie/now_playing");
+  let { results } = data;
 
   let splideOptions = {
     heightRatio: 0.5,
@@ -40,14 +25,14 @@ const Slider = () => {
   return (
     <div className="movieSlider">
       <Splide options={splideOptions}>
-        {latestMovies?.map((item) => {
+        {results?.map((item) => {
           return (
-            <SplideSlide>
+            <SplideSlide key={item.id}>
               <img
                 src={`https://image.tmdb.org/t/p/w1280${item.backdrop_path}`}
                 alt={item.title}
               />
-              <div class="slideCaption">
+              <div className="slideCaption">
                 <h2>{item.title}</h2>
               </div>
             </SplideSlide>
