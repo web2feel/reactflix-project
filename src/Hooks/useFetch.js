@@ -13,8 +13,8 @@ export const useFetch = (url, customParams = {}) => {
     baseURL: "https://api.themoviedb.org/3/",
     url,
     params: {
-      //api_key: "e3ef60114f3455d412ea55db83f798b2",
-      api_key: import.meta.env.VITE_API_KEY,
+      api_key: "e3ef60114f3455d412ea55db83f798b2",
+      // api_key: import.meta.env.VITE_API_KEY,
       ...customParams,
     },
   };
