@@ -1,4 +1,5 @@
-import React,{useState} from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../Context/appContext";
 import { useFetch } from "../Hooks/useFetch";
 import Slider from "../Components/Slider";
 import Wrapper from "../Components/Wrapper";
@@ -8,11 +9,12 @@ import MovieCard from "../Components/MovieCard";
 import Pagination from "../Components/Pagination";
 
 const Home = () => {
+  const {
+    state: { page },
+  } = useContext(AppContext);
+  const [data, loading, error] = useFetch("movie/popular", { page });
+  const { results, total_pages } = data;
 
-    const [page, setPage] = useState(1);
-    const [data, loading, error] = useFetch("movie/popular",{ page });
-    const { results, total_pages } = data;
-  
   return (
     <>
       <Slider />
@@ -29,7 +31,6 @@ const Home = () => {
             </div>
             <Pagination
               page={page}
-              setPage={setPage}
               totalPages={total_pages}
             />
           </>

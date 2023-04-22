@@ -1,19 +1,27 @@
-import React from "react";
-
-function Pagination({ page,setPage, totalPages }) {
+import React, { useContext } from "react";
+import { AppContext } from "../Context/appContext";
+function Pagination({ page, totalPages }) {
+  const { dispatch } = useContext(AppContext);
   const handleNextPage = () => {
-    setPage((prev) => prev + 1);
+    dispatch({
+      type: "NEXT_PAGE",
+    });
   };
   const handlePrevPage = () => {
-    setPage((prev) => prev - 1);
+    dispatch({
+      type: "PREV_PAGE",
+    });
   };
   return (
     <div className="pagination">
-      <button disabled={page <= 1} onClick={handlePrevPage}>Prev</button>
-      <p>Page {page} of {totalPages}</p>
+      <button disabled={page <= 1} onClick={handlePrevPage}>
+        Prev
+      </button>
+      <p>
+        Page {page} of {totalPages}
+      </p>
       <button onClick={handleNextPage}>Next</button>
     </div>
   );
 }
-
 export default Pagination;

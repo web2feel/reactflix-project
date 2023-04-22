@@ -5,13 +5,12 @@ import Wrapper from "../Components/Wrapper";
 
 const MovieInfo = () => {
   let { id } = useParams();
-  
+
   const [data] = useFetch(`movie/${id}`);
 
   const backdrop = {
     backgroundImage: `url(https://image.tmdb.org/t/p/w1280/${data?.backdrop_path})`,
   };
-
   return (
     <div className="moviePage" style={backdrop}>
       <Wrapper>

@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 
 export const useFetch = (url, customParams = {}) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const { page, query } = customParams;
 
   const options = {
     method: "get",
@@ -16,8 +18,6 @@ export const useFetch = (url, customParams = {}) => {
       ...customParams,
     },
   };
-
-  const { page, query } = customParams;
 
   useEffect(() => {
     const fetchData = async () => {
