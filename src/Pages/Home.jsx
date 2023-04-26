@@ -12,6 +12,8 @@ const Home = () => {
   const {
     state: { page },
   } = useContext(AppContext);
+
+
   const [data, loading, error] = useFetch("movie/popular", { page });
   const { results, total_pages } = data;
 

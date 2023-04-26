@@ -8,6 +8,8 @@ export const useFetch = (url, customParams = {}) => {
 
   const { page, query } = customParams;
 
+
+
   const options = {
     method: "get",
     baseURL: "https://api.themoviedb.org/3/",
@@ -18,6 +20,9 @@ export const useFetch = (url, customParams = {}) => {
       ...customParams,
     },
   };
+
+  const memoizedOptions  = useMemo(() => options, [page,query,url]);
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +37,7 @@ export const useFetch = (url, customParams = {}) => {
     };
 
     fetchData();
-  }, [page, query, url]);
+  }, [memoizedOptions]);
 
   return [data, loading, error];
 };
